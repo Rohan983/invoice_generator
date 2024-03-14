@@ -38,11 +38,9 @@ for filepath in filepaths:
     for index, rows in df.iterrows():
         pdf.set_font(family="Times", size=10)
         pdf.set_text_color(80, 80, 80)
-        pdf.cell(w=30, h=8, txt=str(rows["product_id"]), border=1)
-        pdf.cell(w=70, h=8, txt=str(rows["product_name"]), border=1)
-        pdf.cell(w=32, h=8, txt=str(rows["amount_purchased"]), border=1)
-        pdf.cell(w=30, h=8, txt=str(rows["price_per_unit"]), border=1)
-        pdf.cell(w=28, h=8, txt=str(rows["total_price"]), border=1, ln=1)
+        for size, column_name in zip(col_size, column_names):
+            pdf.cell(w=size, h=8, txt=str(rows[column_name]), border=1)
+        pdf.ln(8)
 
     # Calculating and printing total price
     tot_sum = str(df["total_price"].sum())
